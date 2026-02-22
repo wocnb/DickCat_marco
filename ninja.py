@@ -10,92 +10,74 @@ mouse_controller = MouseController()
 
 def shift_right_click(x=None, y=None):
     keyboard_controller.press(Key.shift)
-    time.sleep(0.001)
+    time.sleep(0.1)
     mouse_controller.press(Button.right)
     time.sleep(0.1)
     keyboard_controller.release(Key.shift)
-    time.sleep(0.5)
+    time.sleep(0.1)
     mouse_controller.release(Button.right)
-    print("Shift + 右键点击完成")
 
-def cast1():
+    time.sleep(0.5)
+    mouse_controller.press(Button.right)
+    time.sleep(0.1)
+    mouse_controller.release(Button.right)
+
+def shift_f():
+    keyboard_controller.press(Key.shift)
+    time.sleep(0.1)
+    keyboard_controller.press('f')
+    time.sleep(0.2)
+    keyboard_controller.release(Key.shift)
+    time.sleep(0.1)
+    keyboard_controller.release('f')
+
+    time.sleep(0.3)
+    mouse_controller.press(Button.left)
+    time.sleep(0.2)
+    mouse_controller.release(Button.left)
+
+def combo():
+    shift_right_click()
+    time.sleep(0.2)
+    shift_left_click()
+
+def combo1():
+    shift_f()
+    time.sleep(0.5)
+    keyboard_controller.press('f')
+    time.sleep(0.1)
+    keyboard_controller.release('f')
+
+
+
+def shift_left_click():
     keyboard_controller.press(Key.shift)
     time.sleep(0.1)
     mouse_controller.press(Button.left)
-    time.sleep(0.1) 
+    time.sleep(0.4) 
     keyboard_controller.release(Key.shift)
     time.sleep(0.05)
     mouse_controller.release(Button.left)
-    print("Shift + 左键点击完成")
+   
 
-def cast2():
-    keyboard_controller.press('q')
-    time.sleep(0.5)
-    keyboard_controller.release('q')
-    time.sleep(0.1) 
-    keyboard_controller.press(Key.space)
-    time.sleep(0.8)
-    keyboard_controller.release(Key.space)
-    print("q + 空格点击完成")
 
-def cast3():
-    keyboard_controller.press(Key.shift)
-    time.sleep(0.1)
-    keyboard_controller.press('f')
-    time.sleep(0.1)
-    keyboard_controller.release(Key.shift)
-    keyboard_controller.release('f')
-    print("Shift + f点击完成")
 
-def skill_list():
-    shift_right_click()
-    time.sleep(0.4)
-    cast1()
-    time.sleep(0.7)
-    keyboard_controller.press('f')
-    time.sleep(0.3)
-    keyboard_controller.release('f')
 
-def full_combo():
-    shift_right_click()
-    time.sleep(0.4)
-    cast1()
-    time.sleep(0.5)
-    cast2()
-    time.sleep(0.5)
-    cast3()
-
-def skill_list2():
-    cast2()
-    time.sleep(0.5)
-    cast3()
-    time.sleep(0.5)
-    keyboard_controller.press(Key.shift)
-    time.sleep(0.1)
-    keyboard_controller.press('q')
-    time.sleep(0.1)
-    keyboard_controller.release(Key.shift)
-    keyboard_controller.release('q')
-
-def left():
-    time.sleep(0.3)
-    mouse_controller.press(Button.left)
-    time.sleep(2)
-    mouse_controller.release(Button.left)
 
 def on_press(key):
     try:
         # 检查是否按下了数字1键
         if key.char == '1':
             print("检测到1键被按下，触发Shift+右键点击")
-            thread = threading.Thread(target=skill_list)
+            thread = threading.Thread(target=combo)
             thread.daemon = True
             thread.start()
-        elif key.char == '4':
+        elif key.char == '2':
             print("检测到1键被按下，触发Shift+右键点击")
-            thread = threading.Thread(target=skill_list2)
+            thread = threading.Thread(target=combo1)
             thread.daemon = True
             thread.start()
+            
     except AttributeError:
         pass
 

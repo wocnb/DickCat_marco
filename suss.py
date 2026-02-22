@@ -51,10 +51,7 @@ def skill_list():
     shift_right_click()
     time.sleep(0.4)
     cast1()
-    time.sleep(0.7)
-    keyboard_controller.press('f')
-    time.sleep(0.3)
-    keyboard_controller.release('f')
+    time.sleep(0.5)
 
 def full_combo():
     shift_right_click()
@@ -70,12 +67,9 @@ def skill_list2():
     time.sleep(0.5)
     cast3()
     time.sleep(0.5)
-    keyboard_controller.press(Key.shift)
+    keyboard_controller.press('f')
     time.sleep(0.1)
-    keyboard_controller.press('q')
-    time.sleep(0.1)
-    keyboard_controller.release(Key.shift)
-    keyboard_controller.release('q')
+    keyboard_controller.release('f')
 
 def left():
     time.sleep(0.3)
@@ -86,14 +80,9 @@ def left():
 def on_press(key):
     try:
         # 检查是否按下了数字1键
-        if key.char == '1':
+        if key.char == '3':
             print("检测到1键被按下，触发Shift+右键点击")
-            thread = threading.Thread(target=skill_list)
-            thread.daemon = True
-            thread.start()
-        elif key.char == '4':
-            print("检测到1键被按下，触发Shift+右键点击")
-            thread = threading.Thread(target=skill_list2)
+            thread = threading.Thread(target=left)
             thread.daemon = True
             thread.start()
     except AttributeError:
